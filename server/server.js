@@ -17,8 +17,6 @@ app.get("/getRestaurants", (req, res) => {
     ])
 });
 
-
-
 const port = process.env.PORT || 3001
 app.listen(3000, () => {
     console.log(`Server is listening on port ${port}`);
