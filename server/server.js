@@ -5,8 +5,19 @@ const express = require("express")
 const app = express();
 
 app.get("/getRestaurants", (req, res) => {
-    console.log("get all restaurants");
-})
+    res.json([
+        {
+            name: "Wendy's",
+            location: "New York"
+        },
+        {
+            name: "McDonald's",
+            location: "Los Angeles"
+        }
+    ])
+});
+
+
 
 const port = process.env.PORT || 3001
 app.listen(3000, () => {
