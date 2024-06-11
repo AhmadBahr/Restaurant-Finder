@@ -3,6 +3,7 @@ const express = require("express")
 const app = express();
 const morgan = require("morgan");
 
+app.use(express.json());
 
 // Get all restaurants
 app.get("/api/v1/restaurants", (req, res) => {
@@ -16,27 +17,47 @@ app.get("/api/v1/restaurants", (req, res) => {
 });
 
 // Get a restaurant
-app.get("/api/v1/restaurants/:restaurantsid", (req, res) => {
+app.get("/api/v1/restaurants/:id", (req, res) => {
     console.log(req.params);
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            restaurant: "Batchig"
+        },
+    });
 });
 
 // Create a restaurant
 app.post("/api/v1/restaurants", (req, res) => {
     console.log(req.body);
-});
 
-// Update a restaurant
-app.put("/api/v1/restaurants/:id", (req, res) => {
-    res.status(200).json({
+    res.status(201).json({
         status: "success",
         data: {
-            restaurant: "Haji",
+            restaurant: "Hello"
         },
     });
 });
 
-// Delete a restaurant
-app.delete("/api/v1/restaurants/:id", (req, res) => {
+
+// Update a restaurant
+app.put("/api/v1/restaurant/:id", (req, res) => {
+    console.log(req.params.id);
+    console.log(req.body);
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            restaurant: "Canes"
+        },
+    });
+});
+
+//  Delete a restaurant
+app.delete("/api/v1/restaurant/:id", (req, res) => {
+    console.log(req.params.id);
+
     res.status(204).json({
         status: "success",
         data: null,
