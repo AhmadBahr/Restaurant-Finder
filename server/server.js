@@ -15,6 +15,7 @@ app.get("/api/v1/restaurants", async (req, res) => {
         console.log(results.rows);
         res.status(200).json({
             status: "success",
+            results: results.rows.length,
             data: {
                 restaurants: results.rows,
             },
@@ -48,7 +49,7 @@ app.post("/api/v1/restaurants", async (req, res) => {
         const { name, location, price_range } = req.body;
         const result = await db.query(
             "INSERT INTO restaurants (name, location, price_range) VALUES ($1, $2, $3) RETURNING *",
-            [name, location, price_range]
+            [req.body.name , req.body.location, req.body.price_range]
         );
         res.status(201).json({
             status: "success",
@@ -69,7 +70,7 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
         const { name, location, price_range } = req.body;
         const result = await db.query(
             "UPDATE restaurants SET name = $1, location = $2, price_range = $3 WHERE id = $4 RETURNING *",
-            [name, location, price_range, id]
+            [req.body.name , req.body.location, req.body.price_range, id]
         );
         res.status(200).json({
             status: "success",
@@ -79,26 +80,24 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
         });
     } catch (err) {
         console.error('Error updating restaurant:', err);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error" }); 
     }
 });
 
 // Delete a restaurant
 app.delete("/api/v1/restaurants/:id", async (req, res) => {
     try {
-        const { id } = req.params;
-        await db.query("DELETE FROM restaurants WHERE id = $1", [id]);
+        const results = await db.query("DELETE FROM restaurants WHERE id = $1", [req.params.id]);
         res.status(204).json({
             status: "success",
-            data: null,
         });
     } catch (err) {
-        console.error('Error deleting restaurant:', err);
+        console.log(err);
         res.status(500).json({ error: "Internal server error" });
     }
 });
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+    console.log(`Server is listening on port ${port}`); 
 });
