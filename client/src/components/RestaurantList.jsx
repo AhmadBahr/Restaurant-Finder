@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import RestaurantFinder from '../APIs/RestaurantFinder';
 
 const RestaurantList = () => {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await RestaurantFinder.get("/");
+        setRestaurants(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.error("Error fetching restaurants", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className='list-group'>
       <table className="table table-hover table-dark">
@@ -15,43 +32,23 @@ const RestaurantList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="table-secondary">
-            <th scope="row">1</th>
-            <td>Mark's Diner</td>
-            <td>123 Main St</td>
-            <td>(555) 555-5555</td>
-            <td>mark@example.com</td>
-            <td>
-              <button className="btn btn-warning mr-2">Edit</button>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr className="table-secondary">
-            <th scope="row">2</th>
-            <td>Jane's Cafe</td>
-            <td>456 Oak St</td>
-            <td>(555) 555-1234</td>
-            <td>jane@example.com</td>
-            <td>
-              <button className="btn btn-warning mr-2">Edit</button>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr className="table-secondary">
-            <th scope="row">3</th>
-            <td>Bob's Burgers</td>
-            <td>789 Pine St</td>
-            <td>(555) 555-6789</td>
-            <td>bob@example.com</td>
-            <td>
-              <button className="btn btn-warning mr-2">Edit</button>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
+          {restaurants.map((restaurant, index) => (
+            <tr className="table-secondary" key={restaurant.id}>
+              <th scope="row">{index + 1}</th>
+              <td>{restaurant.name}</td>
+              <td>{restaurant.address}</td>
+              <td>{restaurant.phone}</td>
+              <td>{restaurant.email}</td>
+              <td>
+                <button className="btn btn-warning mr-2">Edit</button>
+                <button className="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
-}
+};
 
 export default RestaurantList;
