@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import RestaurantFinder from '../APIs/RestaurantFinder';
+import { RestaurantsContext } from '../context/RestaurantsContext';
 
 const RestaurantList = () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const { Restaurants, setRestaurants } = useContext(RestaurantsContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,7 +12,7 @@ const RestaurantList = () => {
         setRestaurants(response.data);
         console.log(response.data);
       } catch (err) {
-        console.error("Error fetching restaurants", err);
+        console.error("Error fetching Restaurants", err);
       }
     };
 
@@ -32,7 +33,7 @@ const RestaurantList = () => {
           </tr>
         </thead>
         <tbody>
-          {restaurants.map((restaurant, index) => (
+          {Array.isArray(Restaurants) && Restaurants.map((restaurant, index) => (
             <tr className="table-secondary" key={restaurant.id}>
               <th scope="row">{index + 1}</th>
               <td>{restaurant.name}</td>
