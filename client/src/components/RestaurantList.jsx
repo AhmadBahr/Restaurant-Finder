@@ -22,8 +22,30 @@ const RestaurantList = () => {
             <td>(555) 555-5555</td>
             <td>mark@example.com</td>
             <td>
-              <button className="btn btn-warning btn-sm">Edit</button>
-              <button className="btn btn-danger btn-sm ml-2">Delete</button>
+              <button className="btn btn-warning">Edit</button>
+              <button className="btn btn-danger ml-2">Delete</button>
+            </td>
+          </tr>
+          <tr className="table-secondary">
+            <th scope="row">2</th>
+            <td>Jane's Cafe</td>
+            <td>456 Oak St</td>
+            <td>(555) 555-1234</td>
+            <td>jane@example.com</td>
+            <td>
+              <button className="btn btn-warning">Edit</button>
+              <button className="btn btn-danger ml-2">Delete</button>
+            </td>
+          </tr>
+          <tr className="table-secondary">
+            <th scope="row">3</th>
+            <td>Bob's Burgers</td>
+            <td>789 Pine St</td>
+            <td>(555) 555-6789</td>
+            <td>bob@example.com</td>
+            <td>
+              <button className="btn btn-warning">Edit</button>
+              <button className="btn btn-danger ml-2">Delete</button>
             </td>
           </tr>
         </tbody>
