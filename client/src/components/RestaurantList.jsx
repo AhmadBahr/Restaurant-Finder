@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RestaurantFinder from '../APIs/RestaurantFinder';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 
 const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +32,11 @@ const RestaurantList = (props) => {
     }
   };
 
+  const handleUpdate = (id, e) => {
+    e.stopPropagation();
+    navigate(`/restaurants/${id}/update`);
+  };
+
   return (
     <div className='list-group'>
       <table className="table table-hover table-dark">
@@ -54,10 +61,12 @@ const RestaurantList = (props) => {
               <td>{restaurant.phone}</td>
               <td>{restaurant.email}</td>
               <td>
-                <a href={`/restaurants/${restaurant.id}`} className="btn btn-warning mt-1">
+                <button onClick={(e) => handleUpdate(restaurant.id, e)} className="btn btn-warning mt-1">
                   Update
-                </a>
-                <button onClick={(e) => handleDelete(restaurant.id, e)} className="btn btn-danger mt-1 ml-1">Delete</button>
+                </button>
+                <button onClick={(e) => handleDelete(restaurant.id, e)} className="btn btn-danger mt-1 ml-1">
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
