@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantFinder from "../APIs/RestaurantFinder";
 import { RestaurantsContext } from "../context/RestaurantsContext";
+import StarRating from "../components/StarRating";
 
 const RestaurantDetailPage = () => {
   const { id } = useParams();
-  const { selectedRestaurant, setSelectedRestaurant } =
-    useContext(RestaurantsContext);
+  const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantsContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +32,7 @@ const RestaurantDetailPage = () => {
       <p>Price Range: {"$".repeat(selectedRestaurant.price_range)}</p>
       <p>Phone: {selectedRestaurant.phone}</p>
       <p>Email: {selectedRestaurant.email}</p>
+      <StarRating rating={selectedRestaurant.rating} />
     </div>
   );
 };
