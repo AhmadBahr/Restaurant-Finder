@@ -26,13 +26,18 @@ const RestaurantDetailPage = () => {
   }
 
   return (
-    <div>
-      <h1>{selectedRestaurant.name}</h1>
-      <p>Location: {selectedRestaurant.location}</p>
-      <p>Price Range: {"$".repeat(selectedRestaurant.price_range)}</p>
-      <p>Phone: {selectedRestaurant.phone}</p>
-      <p>Email: {selectedRestaurant.email}</p>
-      <StarRating rating={selectedRestaurant.rating} />
+    <div className="mt-3">
+      <h1 className="text-center display-1">{selectedRestaurant.name}</h1>
+      <div className="text-center">
+        <StarRating rating={parseFloat(selectedRestaurant.average_rating)} />
+        <span className="text-warning ml-1">{selectedRestaurant.average_rating}</span>
+      </div>
+      <div className="mt-3">
+        <p>{selectedRestaurant.location}</p>
+      </div>
+      <div>
+        <p>{selectedRestaurant.description}</p>
+      </div>
     </div>
   );
 };
