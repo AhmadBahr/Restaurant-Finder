@@ -1,92 +1,128 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import RestaurantFinder from '../APIs/RestaurantFinder';
-import { RestaurantsContext } from '../context/RestaurantsContext';
+import React, { useEffect, useContext } from "react";
+import RestaurantFinder from "../apis/RestaurantFinder";
+import { RestaurantsContext } from "../context/RestaurantsContext";
+import { useHistory } from "react-router-dom";
+import StarRating from "./StarRating";
 
-const RestaurantList = () => {
+const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  let navigate = useNavigate();
-
+  let history = useHistory();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await RestaurantFinder.get('/');
+        const response = await RestaurantFinder.get("/");
+        console.log(response.data.data);
         setRestaurants(response.data.data.restaurants);
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-        setError('Failed to fetch restaurants');
-        setLoading(false);
-      }
+      } catch (err) {}
     };
 
     fetchData();
-  }, [setRestaurants]);
+  }, []);
 
-  const handleDelete = async (id, e) => {
+  const handleDelete = async (e, id) => {
     e.stopPropagation();
-
     try {
-      await RestaurantFinder.delete(`/${id}`);
-      setRestaurants(restaurants.filter((restaurant) => restaurant.id !== id));
+      const response = await RestaurantFinder.delete(`/${id}`);
+      setRestaurants(
+        restaurants.filter((restaurant) => {
+          return restaurant.id !== id;
+        })
+      );
     } catch (err) {
-      console.error(err);
-      setError('Failed to delete restaurant');
+      console.log(err);
     }
   };
 
-  const handleUpdate = (id, e) => {
+  const handleUpdate = (e, id) => {
     e.stopPropagation();
-    navigate(`/restaurants/${id}/update`);
+    history.push(`/restaurants/${id}/update`);
   };
 
   const handleRestaurantSelect = (id) => {
-    navigate(`/restaurants/${id}`);
+    history.push(`/restaurants/${id}`);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  const renderRating = (restaurant) => {
+    if (!restaurant.count) {
+      return <span className="text-warning">0 reviews</span>;
+    }
+    return (
+      <>
+        <StarRating rating={restaurant.id} />
+        <span className="text-warning ml-1">({restaurant.count})</span>
+      </>
+    );
+  };
 
   return (
     <div className="list-group">
       <table className="table table-hover table-dark">
-        <thead className="bg-primary text-white">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Restaurant Name</th>
-            <th scope="col">Address</th>
+        <thead>
+          <tr className="bg-primary">
+            <th scope="col">Restaurant</th>
+            <th scope="col">Location</th>
             <th scope="col">Price Range</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Action</th>
+            <th scope="col">Ratings</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
-          {restaurants && restaurants.map((restaurant, index) => (
-            <tr onClick={() => handleRestaurantSelect(restaurant.id)} key={restaurant.id}>
-              <td>{index + 1}</td>
-              <td>{restaurant.name}</td>
-              <td>{restaurant.address}</td>
-              <td>{"$".repeat(restaurant.price_range)}</td>
-              <td>{restaurant.phone}</td>
-              <td>{restaurant.email}</td>
-              <td>
-                <button onClick={(e) => handleUpdate(restaurant.id, e)} className="btn btn-warning mt-1">
-                  Update
-                </button>
-                <button onClick={(e) => handleDelete(restaurant.id, e)} className="btn btn-danger mt-1 ml-1">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {restaurants &&
+            restaurants.map((restaurant) => {
+              return (
+                <tr
+                  onClick={() => handleRestaurantSelect(restaurant.id)}
+                  key={restaurant.id}
+                >
+                  <td>{restaurant.name}</td>
+                  <td>{restaurant.location}</td>
+                  <td>{"$".repeat(restaurant.price_range)}</td>
+                  <td>{renderRating(restaurant)}</td>
+                  <td>
+                    <button
+                      onClick={(e) => handleUpdate(e, restaurant.id)}
+                      className="btn btn-warning"
+                    >
+                      Update
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={(e) => handleDelete(e, restaurant.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          {/* <tr>
+            <td>mcdonalds</td>
+            <td>New YOrk</td>
+            <td>$$</td>
+            <td>Rating</td>
+            <td>
+              <button className="btn btn-warning">Update</button>
+            </td>
+            <td>
+              <button className="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>mcdonalds</td>
+            <td>New YOrk</td>
+            <td>$$</td>
+            <td>Rating</td>
+            <td>
+              <button className="btn btn-warning">Update</button>
+            </td>
+            <td>
+              <button className="btn btn-danger">Delete</button>
+            </td>
+          </tr> */}
         </tbody>
       </table>
     </div>
