@@ -19,7 +19,7 @@ app.get("/api/v1/Restaurants", async (req, res) => {
             status: "success",
             results: results.rows.length,
             data: {
-                Restaurants: results.rows,
+                restaurants: results.rows,
             },
         });
     } catch (err) {
@@ -32,11 +32,18 @@ app.get("/api/v1/Restaurants", async (req, res) => {
 app.get("/api/v1/Restaurants/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await db.query("SELECT * FROM Restaurants WHERE id = $1", [id]);
+        const restaurant = await db.query("SELECT * FROM Restaurants WHERE id = $1", [id]);
+        if (restaurant.rows.length === 0) {
+            return res.status(404).json({ error: "Restaurant not found" });
+        }
+        // Fetch reviews for the restaurant if needed
+        const reviews = await db.query("SELECT * FROM reviews WHERE restaurant_id = $1", [id]);
+
         res.status(200).json({
             status: "success",
             data: {
-                restaurant: result.rows[0],
+                restaurant: restaurant.rows[0],
+                reviews: reviews.rows, // Include reviews in response if fetched
             },
         });
     } catch (err) {
@@ -51,7 +58,7 @@ app.post("/api/v1/Restaurants", async (req, res) => {
         const { name, location, price_range } = req.body;
         const result = await db.query(
             "INSERT INTO Restaurants (name, location, price_range) VALUES ($1, $2, $3) RETURNING *",
-            [req.body.name , req.body.location, req.body.price_range]
+            [name, location, price_range]
         );
         res.status(201).json({
             status: "success",
@@ -72,8 +79,11 @@ app.put("/api/v1/Restaurants/:id", async (req, res) => {
         const { name, location, price_range } = req.body;
         const result = await db.query(
             "UPDATE Restaurants SET name = $1, location = $2, price_range = $3 WHERE id = $4 RETURNING *",
-            [req.body.name , req.body.location, req.body.price_range, id]
+            [name, location, price_range, id]
         );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: "Restaurant not found" });
+        }
         res.status(200).json({
             status: "success",
             data: {
@@ -82,24 +92,28 @@ app.put("/api/v1/Restaurants/:id", async (req, res) => {
         });
     } catch (err) {
         console.error('Error updating restaurant:', err);
-        res.status(500).json({ error: "Internal server error" }); 
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 
 // Delete a restaurant
 app.delete("/api/v1/Restaurants/:id", async (req, res) => {
     try {
-        const results = await db.query("DELETE FROM Restaurants WHERE id = $1", [req.params.id]);
+        const { id } = req.params;
+        const result = await db.query("DELETE FROM Restaurants WHERE id = $1", [id]);
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Restaurant not found" });
+        }
         res.status(204).json({
             status: "success",
         });
     } catch (err) {
-        console.log(err);
+        console.error('Error deleting restaurant:', err);
         res.status(500).json({ error: "Internal server error" });
     }
 });
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`); 
+    console.log(`Server is listening on port ${port}`);
 });
