@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RestaurantFinder from '../APIs/RestaurantFinder';
 import { RestaurantsContext } from '../context/RestaurantsContext';
 
-const RestaurantList = (props) => {
+const RestaurantList = () => {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -12,8 +14,11 @@ const RestaurantList = (props) => {
       try {
         const response = await RestaurantFinder.get('/');
         setRestaurants(response.data.data.restaurants);
-      } catch (error) {
-        console.error(error);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError('Failed to fetch restaurants');
+        setLoading(false);
       }
     };
 
@@ -24,11 +29,11 @@ const RestaurantList = (props) => {
     e.stopPropagation();
 
     try {
-      const response = await RestaurantFinder.delete(`/${id}`);
-      console.log(response);
+      await RestaurantFinder.delete(`/${id}`);
       setRestaurants(restaurants.filter((restaurant) => restaurant.id !== id));
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to delete restaurant');
     }
   };
 
@@ -37,8 +42,20 @@ const RestaurantList = (props) => {
     navigate(`/restaurants/${id}/update`);
   };
 
+  const handleRestaurantSelect = (id) => {
+    navigate(`/restaurants/${id}`);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
-    <div className='list-group'>
+    <div className="list-group">
       <table className="table table-hover table-dark">
         <thead className="bg-primary text-white">
           <tr>
@@ -53,7 +70,7 @@ const RestaurantList = (props) => {
         </thead>
         <tbody>
           {restaurants && restaurants.map((restaurant, index) => (
-            <tr key={restaurant.id}>
+            <tr onClick={() => handleRestaurantSelect(restaurant.id)} key={restaurant.id}>
               <td>{index + 1}</td>
               <td>{restaurant.name}</td>
               <td>{restaurant.address}</td>

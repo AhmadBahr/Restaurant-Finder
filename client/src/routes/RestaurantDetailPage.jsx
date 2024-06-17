@@ -2,7 +2,9 @@ import React from 'react'
 
 const RestaurantDetailPage = () => {
   return (
-    <div>RestaurantDetailPage</div>
+    <div>
+      
+    </div>
   )
 }
 
