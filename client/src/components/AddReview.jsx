@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import RestaurantFinder from '../APIs/RestaurantFinder';
 
 const AddReview = () => {
     const [name, setName] = useState('');
@@ -7,11 +8,23 @@ const AddReview = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ name, rating, reviewText });
-        setName('');
-        setRating('');
-        setReviewText('');
-    }
+        const formData = {
+            name,
+            rating: parseInt(rating), 
+            review: reviewText
+        };
+
+        RestaurantFinder.post(`/${location.pathname}/addReview`, formData)
+            .then((response) => {
+                console.log(response);
+                setName('');
+                setRating('');
+                setReviewText('');
+            })
+            .catch((err) => {
+                console.error('Error adding review:', err);
+            });
+    };
 
     return (
         <div className='mb-2'>
@@ -25,6 +38,7 @@ const AddReview = () => {
                         placeholder='Enter your name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        required
                     />
                 </div>
                 <div className='form-group col-8 mt-2'>
@@ -35,6 +49,7 @@ const AddReview = () => {
                         placeholder='Enter your review'
                         value={reviewText}
                         onChange={(e) => setReviewText(e.target.value)}
+                        required
                     ></textarea>
                 </div>
                 <div className='form-group col-8 mt-2'>
@@ -44,6 +59,7 @@ const AddReview = () => {
                         className="form-control"
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
+                        required
                     >
                         <option value="">Choose rating</option>
                         <option value="1">1</option>
@@ -56,7 +72,7 @@ const AddReview = () => {
                 <button type='submit' className='btn btn-primary mt-2'>Submit</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default AddReview;
