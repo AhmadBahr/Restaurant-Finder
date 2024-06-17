@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
-import RestaurantsDetailPage from "./routes/RestaurantDetailPage";
+import RestaurantDetailPage from "./routes/RestaurantDetailPage"; 
 import UpdatePage from "./routes/UpdatePage";
 import { RestaurantsContextProvider } from "./context/RestaurantsContext";
 
@@ -12,8 +12,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Restaurants/:id/update" element={<UpdatePage />} />
-            <Route path="/Restaurants/:id" element={<RestaurantsDetailPage />} />
+            <Route path="/restaurants/:id/update" element={<RestaurantDetailPage />} /> 
+            <Route path="/restaurants/:id" element={<UpdatePage />} /> 
           </Routes>
         </Router>
       </div>
