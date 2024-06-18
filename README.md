@@ -56,12 +56,15 @@ Open your browser and go to http://localhost:3000 to view the website.
 ## Features
 
 Restaurant Listings:
+
 PostgreSQL stores restaurant data, including names, locations, categories, and images. Express.js defines endpoints for creating, retrieving, updating, and deleting restaurant listings, while React components display the restaurant information.
 
 Reviews and Ratings:
+
 PostgreSQL stores reviews and ratings associated with restaurants. Express.js defines endpoints for adding and retrieving reviews and ratings, while React components handle the display and interaction with these elements.
 
 Search and Filter:
+
 PostgreSQL supports searching and filtering of restaurant listings based on various criteria such as location, category, and rating. React components provide a user interface for searching and filtering restaurants.
 
 # Code & Snippets: 
