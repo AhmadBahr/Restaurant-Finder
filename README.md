@@ -52,9 +52,9 @@ React Router is a routing library for React applications. It enables navigation 
 - Open your browser and go to http://localhost:3000 to view the website.
 
 - Set up PostgreSQL:
-. Ensure PostgreSQL is installed and running on your machine.
-Create a database named restaurant_finder.
-Update the database configuration in the config/config.json file with your PostgreSQL username, password, and database details.
+  Create a database named restaurant_finder.
+  Update the database configuration in the config/config.json file with your PostgreSQL username, password, and database 
+ details.
 
 ## Features
 
