@@ -41,18 +41,18 @@ React Router is a routing library for React applications. It enables navigation 
 
 - Clone the repository: git clone https://github.com/your-username/restaurant-finder.git
 
-Navigate to the project directory: cd restaurant-finder
+- Navigate to the project directory: cd restaurant-finder
 
-Install backend dependencies: npm install
+- Install backend dependencies: npm install
+ 
+- Install frontend dependencies: cd client && npm install
 
-Install frontend dependencies: cd client && npm install
+- Start the development server: npm start
 
-Start the development server: npm start
+- Open your browser and go to http://localhost:3000 to view the website.
 
-Open your browser and go to http://localhost:3000 to view the website.
-
-Set up PostgreSQL:
-Ensure PostgreSQL is installed and running on your machine.
+- Set up PostgreSQL:
+. Ensure PostgreSQL is installed and running on your machine.
 Create a database named restaurant_finder.
 Update the database configuration in the config/config.json file with your PostgreSQL username, password, and database details.
 
