@@ -19,6 +19,9 @@ Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allow
 # Express.js
 Express.js is a web application framework for Node.js. It simplifies the process of building web applications and APIs by providing a robust set of features for routing, middleware, and HTTP utilities.
 
+# PostgreSQL
+PostgreSQL is a powerful, open-source relational database management system. It is used to store and manage restaurant data, user profiles, reviews, and other relational data in this application.
+
 
 ## Frontend Technologies Used:
 
@@ -52,13 +55,13 @@ Open your browser and go to http://localhost:3000 to view the website.
 
 ## Features
 
-Restaurant Listings:
+Restaurant Listings
 PostgreSQL stores restaurant data, including names, locations, categories, and images. Express.js defines endpoints for creating, retrieving, updating, and deleting restaurant listings, while React components display the restaurant information.
 
-Reviews and Ratings:
+Reviews and Ratings
 PostgreSQL stores reviews and ratings associated with restaurants. Express.js defines endpoints for adding and retrieving reviews and ratings, while React components handle the display and interaction with these elements.
 
-Search and Filter:
+Search and Filter
 PostgreSQL supports searching and filtering of restaurant listings based on various criteria such as location, category, and rating. React components provide a user interface for searching and filtering restaurants.
 
 # Code & Snippets: 
