@@ -37,21 +37,23 @@ React is a JavaScript library for building user interfaces. It allows developers
 # React Router
 React Router is a routing library for React applications. It enables navigation and rendering of different components based on the URL.
 
-# Sequelize
-Sequelize is a promise-based Node.js ORM (Object-Relational Mapping) for PostgreSQL. It provides a straightforward API for interacting with the PostgreSQL database, defining models, and managing relationships between data.
-
 ## Setup
-Clone the repository: git clone https://github.com/your-username/social-media-website.git
+Clone the repository: git clone https://github.com/your-username/restaurant-finder.git
 
-Navigate to the project directory: cd social-media-website
+Navigate to the project directory: cd restaurant-finder
 
 Install backend dependencies: npm install
 
 Install frontend dependencies: cd client && npm install
 
-Start the development server: npm run dev
+Start the development server: npm start
 
 Open your browser and go to http://localhost:3000 to view the website.
+
+Set up PostgreSQL:
+Ensure PostgreSQL is installed and running on your machine.
+Create a database named restaurant_finder.
+Update the database configuration in the config/config.json file with your PostgreSQL username, password, and database details.
 
 ## Features
 
