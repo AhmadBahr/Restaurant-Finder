@@ -9,7 +9,7 @@
 6. [**Code & Snippets**](#CodeSnippets)
 
 ## General Info
-This project is a Yelp clone built using the PERN (PostgreSQL, Express.js, React, Node.js) stack. It enables users to find and review restaurants, create profiles, and interact with other users by posting reviews and ratings.
+This project is a Yelp clone built using the PERN (PostgreSQL, Express.js, React, Node.js) stack. It enables users to find and review restaurants, and interact by posting reviews and ratings.
 
 ## Backend Technologies Used:
 
