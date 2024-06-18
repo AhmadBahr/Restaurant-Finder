@@ -38,7 +38,8 @@ React is a JavaScript library for building user interfaces. It allows developers
 React Router is a routing library for React applications. It enables navigation and rendering of different components based on the URL.
 
 ## Setup
-Clone the repository: git clone https://github.com/your-username/restaurant-finder.git
+
+- Clone the repository: git clone https://github.com/your-username/restaurant-finder.git
 
 Navigate to the project directory: cd restaurant-finder
 
