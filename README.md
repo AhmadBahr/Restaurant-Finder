@@ -72,6 +72,12 @@ PostgreSQL supports searching and filtering of restaurant listings based on vari
 
 # Code & Snippets: 
 ## Backend Code Snippets:
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_54_51 AM](https://github.com/user-attachments/assets/b7eeca00-9a51-40b8-a0a2-882f8e2ca8cc)
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_54_39 AM](https://github.com/user-attachments/assets/fa2524db-3f15-4835-a373-4ba9bc331ebc)
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_54_29 AM](https://github.com/user-attachments/assets/4172c3d8-e779-4dc3-a380-4dc2fc1bcd33)
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_54_22 AM](https://github.com/user-attachments/assets/fedb1d65-06d7-4e38-a547-c306d5911227)
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_54_16 AM](https://github.com/user-attachments/assets/83380ebf-900a-4ca2-a907-6b2f79349425)
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_54_08 AM](https://github.com/user-attachments/assets/0e7130af-8870-4e5c-bef7-528503ac7858)
 
 ## Frontend Code Snippets:
 <img width="1423" alt="98515979-bff90d00-2220-11eb-9c34-955e5fcaae6e" src="https://github.com/user-attachments/assets/fe98a875-2812-4985-939b-eb688171c65b">
