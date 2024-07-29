@@ -74,3 +74,9 @@ PostgreSQL supports searching and filtering of restaurant listings based on vari
 ## Backend Code Snippets:
 
 ## Frontend Code Snippets:
+<img width="1423" alt="98515979-bff90d00-2220-11eb-9c34-955e5fcaae6e" src="https://github.com/user-attachments/assets/fe98a875-2812-4985-939b-eb688171c65b">
+![Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_50_12 AM](https://github.com/user-attachments/assets/717583a7-6977-4268-9345-7b16d91d5356)
+![Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_49_37 AM](https://github.com/user-attachments/assets/6f0a326a-14f8-4890-831f-1224759ca27a)
+![Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_49_27 AM](https://github.com/user-attachments/assets/07bd8085-ebe9-4858-aba8-0d2c4f9f09dd)
+![Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_49_19 AM](https://github.com/user-attachments/assets/52c580be-b61f-4d99-8f95-211d6bb901c2)
+![AddRestaurant jsx - Restaurant-Finder - ahmad - Visual Studio Code 30-Jul-24 1_50_38 AM](https://github.com/user-attachments/assets/4e8f0ea6-5320-4d1a-9678-d2d45439be08)
